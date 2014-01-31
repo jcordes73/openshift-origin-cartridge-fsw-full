@@ -1,0 +1,50 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_FSW_DIR/bin/util
+
+case "$1" in
+  -v|--version)
+    version="$2"
+esac
+
+fsw_version=6.0.0.GA
+
+echo "$version" > "$OPENSHIFT_FSW_DIR/env/OPENSHIFT_FSW_VERSION"
+
+# JA Bride
+echo "$fsw_version" > "$OPENSHIFT_FSW_DIR/env/OPENSHIFT_FSW_VERSION"
+
+ln -s ${OPENSHIFT_FSW_DIR}/standalone/log ${OPENSHIFT_FSW_DIR}/logs
+
+shopt -s dotglob
+cp -r ${OPENSHIFT_FSW_DIR}/versions/${version}/template/* ${OPENSHIFT_FSW_DIR}/template
+cp -r ${OPENSHIFT_FSW_DIR}/versions/${version}/template/.openshift ${OPENSHIFT_FSW_DIR}/template
+cp ${OPENSHIFT_FSW_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_FSW_DIR}/template/.openshift/config
+
+sed -i "s/{APP_NAME}/${OPENSHIFT_APP_NAME}/g" ${OPENSHIFT_FSW_DIR}/template/pom.xml
+
+# Create and install the initial template WAR
+pushd $OPENSHIFT_FSW_DIR/versions/${version}/template/src/main/webapp 1>/dev/null
+  jar cvf $OPENSHIFT_FSW_DIR/standalone/deployments/ROOT.war ./*
+popd 1> /dev/null
+
+# JBride :  now using jboss_bpm_soa EAP
+#JBOSS_HOME=/etc/alternatives/jbosseap-$version
+JBOSS_HOME=/opt/jboss_bpm_soa/jboss-eap-6.1
+pushd $OPENSHIFT_FSW_DIR 1> /dev/null
+  ln -s ${JBOSS_HOME}/jboss-modules.jar
+  ln -s ${JBOSS_HOME}/modules
+popd 1> /dev/null
+
+touch ${OPENSHIFT_FSW_DIR}/env/OPENSHIFT_FSW_CLUSTER
+touch ${OPENSHIFT_FSW_DIR}/env/OPENSHIFT_FSW_CLUSTER_REMOTING
+
+update-configuration java7
+
+# JA Bride
+# System property is passed to jbpm engine at start-up containing absolute path to this quartz properties file
+cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/quartz-ram.properties ${OPENSHIFT_DATA_DIR}
+
+# copy any project CLI files to filtered directory
+mkdir -p ${OPENSHIFT_FSW_DIR}/filtered
+cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/* ${OPENSHIFT_FSW_DIR}/filtered

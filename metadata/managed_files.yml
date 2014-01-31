@@ -1,0 +1,17 @@
+---
+locked_files:
+- bin/
+- bin/*
+- conf/
+- conf/*
+- tools/
+- tools/*
+- metadata/
+- metadata/*
+- env/
+- env/OPENSHIFT_FSW_DIR
+- env/OPENSHIFT_FSW_LOG_DIR
+- env/OPENSHIFT_FSW_JDK*
+- env/OPENSHIFT_FSW_VERSION
+processed_templates:
+- '**/*.erb'
