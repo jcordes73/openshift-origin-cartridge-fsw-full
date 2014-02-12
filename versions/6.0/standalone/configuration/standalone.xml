@@ -441,10 +441,8 @@
         <subsystem xmlns="urn:jboss:domain:web:1.4" default-virtual-server="default-host" native="false">
             <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>
             <virtual-server name="default-host" enable-welcome-root="false">
-            <alias name="localhost"/>
-            <alias name="example.com"/>
-            <!-- JA Bride:  support SSO in biz-central / dashboard -->
-            <sso/>
+              <alias name="localhost"/>
+              <alias name="example.com"/>
             </virtual-server>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:webservices:1.1">
@@ -462,7 +460,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:1.0" />
 
-        <!-- JA Bride:  adding fsw subsystems -->
+        <!-- JA Bride:  adding fsw subsystems
         <subsystem xmlns="urn:jboss:domain:switchyard:1.0">
             <security-configs/>
             <modules>
@@ -529,7 +527,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:modeshape:1.0">
             <repository name="sramp" cache-name="sramp" cache-container="modeshape" security-domain="overlord-idp" anonymous-roles="readonly" use-anonymous-upon-failed-authentication="false"/>
-        </subsystem>
+        </subsystem -->
     </profile>
 
     <interfaces>
