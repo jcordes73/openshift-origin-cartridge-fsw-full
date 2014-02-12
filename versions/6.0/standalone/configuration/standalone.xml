@@ -35,7 +35,6 @@
 
         <!-- JA Bride:  adding fsw deps -->
         <extension module="org.switchyard"/>
-        <extension module="org.jboss.as.messaging"/>
         <extension module="org.modeshape"/>
     </extensions>
     
@@ -460,7 +459,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:1.0" />
 
-        <!-- JA Bride:  adding fsw subsystems
+        <!-- JA Bride:  adding fsw subsystems -->
         <subsystem xmlns="urn:jboss:domain:switchyard:1.0">
             <security-configs/>
             <modules>
@@ -527,7 +526,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:modeshape:1.0">
             <repository name="sramp" cache-name="sramp" cache-container="modeshape" security-domain="overlord-idp" anonymous-roles="readonly" use-anonymous-upon-failed-authentication="false"/>
-        </subsystem -->
+        </subsystem>
     </profile>
 
     <interfaces>
