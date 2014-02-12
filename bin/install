@@ -41,10 +41,6 @@ touch ${OPENSHIFT_FSW_DIR}/env/OPENSHIFT_FSW_CLUSTER_REMOTING
 
 update-configuration java7
 
-# JA Bride
-# System property is passed to jbpm engine at start-up containing absolute path to this quartz properties file
-cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/quartz-ram.properties ${OPENSHIFT_DATA_DIR}
-
 # copy any project CLI files to filtered directory
 mkdir -p ${OPENSHIFT_FSW_DIR}/filtered
 cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/* ${OPENSHIFT_FSW_DIR}/filtered
