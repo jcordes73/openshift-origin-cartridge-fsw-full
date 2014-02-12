@@ -44,3 +44,7 @@ update-configuration java7
 # copy any project CLI files to filtered directory
 mkdir -p ${OPENSHIFT_FSW_DIR}/filtered
 cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/* ${OPENSHIFT_FSW_DIR}/filtered
+
+# copy any project CLI files to filtered directory
+mkdir -p ${OPENSHIFT_FSW_DIR}/filtered
+cp ${OPENSHIFT_FSW_DIR}/versions/${version}/conf/* ${OPENSHIFT_FSW_DIR}/filtered
