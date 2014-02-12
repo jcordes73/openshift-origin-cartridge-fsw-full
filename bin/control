@@ -285,7 +285,18 @@ function deploy() {
             echo "jbpm database already exists"
         else
             #     NOTE:  not sure why can't connect to mysql host while in this start block without having to specify host details
-            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p mysql -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_BPMS_DIR/filtered/fswfull.sql
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p mysql -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/fswfull.sql
+
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p jbpm -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/jbpm-test.org.jbpm.persistence.jpa.MySQL5InnoDBDialect.sql
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p jbpm -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/hibernate_sequence.MySQL5InnoDBDialect.sql
+
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p rtgov -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/gadget-web.gadget-core.MySQL5InnoDBDialect.sql
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p rtgov -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/overlord-rtgov.overlord-rtgov-activity.MySQL5InnoDBDialect.sql
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p rtgov -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/overlord-rtgov-epn.overlord-rtgov-epn.MySQL5InnoDBDialect.sql
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p rtgov -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/rtgov.MySQL5InnoDBDialect.sql
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p rtgov -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/import_rtgov.MySQL5InnoDBDialect.sql
+
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p bpel -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/riftsaw-dao-jpa.ode-scheduler.MySQL5InnoDBDialect.sql
         fi
 
     fi

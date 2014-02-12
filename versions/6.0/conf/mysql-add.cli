@@ -1,12 +1,28 @@
-if (outcome == success) of /subsystem=datasources/data-source=bpel:read-attribute(name=enabled)
-    /subsystem=datasources/data-source=bpel/:disable()
-    /subsystem=datasources/data-source=bpel/:remove()
-end-if
 if (outcome == success) of /system-property=hibernate.dialect:read-attribute(name=value)
     /system-property=hibernate.dialect/:remove()
 end-if
 if (outcome == success) of /system-property=hibernate.hbm2ddl.auto:read-attribute(name=value)
     /system-property=hibernate.hbm2ddl.auto/:remove()
+end-if
+if (outcome == success) of /subsystem=datasources/data-source=bpel:read-attribute(name=enabled)
+    /subsystem=datasources/data-source=bpel/:disable()
+    /subsystem=datasources/data-source=bpel/:remove()
+end-if
+if (outcome == success) of /subsystem=datasources/data-source=gs:read-attribute(name=enabled)
+    /subsystem=datasources/data-source=gs/:disable()
+    /subsystem=datasources/data-source=gs/:remove()
+end-if
+if (outcome == success) of /subsystem=datasources/data-source=jbpm:read-attribute(name=enabled)
+    /subsystem=datasources/data-source=jbpm/:disable()
+    /subsystem=datasources/data-source=jbpm/:remove()
+end-if
+if (outcome == success) of /subsystem=datasources/data-source=rtgov:read-attribute(name=enabled)
+    /subsystem=datasources/data-source=rtgov/:disable()
+    /subsystem=datasources/data-source=rtgov/:remove()
+end-if
+if (outcome == success) of /subsystem=datasources/data-source=sramp:read-attribute(name=enabled)
+    /subsystem=datasources/data-source=sramp/:disable()
+    /subsystem=datasources/data-source=sramp/:remove()
 end-if
 
 reload
@@ -14,7 +30,6 @@ reload
 batch
     /system-property=hibernate.dialect/:add(value="org.hibernate.dialect.MySQL5InnoDBDialect")
     /system-property=hibernate.hbm2ddl.auto/:add(value="none")
-
     /subsystem=datasources/jdbc-driver=mysql/:add(driver-name=mysql,driver-module-name=com.mysql.jdbc,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource,jdbc-compliant=false)
 
     /subsystem=datasources/data-source=bpel:add(jndi-name=java:jboss/datasources/BpelDS,connection-url=jdbc:mysql://${env.OPENSHIFT_MYSQL_DB_HOST}:${env.OPENSHIFT_MYSQL_DB_PORT}/bpel,driver-class=com.mysql.jdbc.Driver,driver-name=mysql,user-name=${env.OPENSHIFT_MYSQL_DB_USERNAME},password=${env.OPENSHIFT_MYSQL_DB_PASSWORD},pool-name=bpel_ds_pool,max-pool-size=5,min-pool-size=1)
