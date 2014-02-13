@@ -287,6 +287,7 @@ function deploy() {
             #     NOTE:  not sure why can't connect to mysql host while in this start block without having to specify host details
             mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p mysql -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/fswfull.sql
 
+            mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p mysql -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/safe-guard-procedures.MySQL5InnoDBDialect.sql
             mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p jbpm -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/jbpm-test.org.jbpm.persistence.jpa.MySQL5InnoDBDialect.sql
             mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p jbpm -h $OPENSHIFT_MYSQL_DB_HOST -p$OPENSHIFT_MYSQL_DB_PASSWORD < $OPENSHIFT_FSW_DIR/filtered/hibernate_sequence.MySQL5InnoDBDialect.sql
 
