@@ -35,7 +35,9 @@
 
         <!-- JA Bride:  adding fsw deps -->
         <extension module="org.switchyard"/>
-        <extension module="org.modeshape"/>
+
+        <!-- add back in once sramp modules are added in ITOS -->
+        <!-- extension module="org.modeshape"/ -->
     </extensions>
     
     <system-properties>
@@ -524,9 +526,10 @@
                 <extension identifier="org.apache.camel.soap"/>
             </extensions>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:modeshape:1.0">
+        <!-- add back in once sramp modules are added in ITOS -->
+        <!--subsystem xmlns="urn:jboss:domain:modeshape:1.0">
             <repository name="sramp" cache-name="sramp" cache-container="modeshape" security-domain="overlord-idp" anonymous-roles="readonly" use-anonymous-upon-failed-authentication="false"/>
-        </subsystem>
+        </subsystem -->
     </profile>
 
     <interfaces>
