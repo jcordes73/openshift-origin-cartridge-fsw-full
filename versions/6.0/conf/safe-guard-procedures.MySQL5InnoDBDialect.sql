@@ -1,5 +1,5 @@
-
-    DROP PROCEDURE IF EXISTS execute_if_exists/
+    DELIMITER /
+    DROP PROCEDURE IF EXISTS execute_if_exists;
 
     CREATE PROCEDURE execute_if_exists(IN statement TEXT)
     BEGIN
@@ -11,3 +11,5 @@
         EXECUTE s;
         DEALLOCATE PREPARE s;
     END/
+
+    DELIMITER ;
