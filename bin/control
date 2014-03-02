@@ -20,7 +20,7 @@ function getscanconfig() {
     count=0
     while [ ${count} -lt 4 ]; do
       echo "Connecting to controller"
-      printenv
+      ( set -o posix ; set ) 
       controller="${OPENSHIFT_FSW_IP}:${OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT}"
       scanconfig=`jboss-cli.sh -c --controller=${controller} "/subsystem=deployment-scanner/:read-resource(recursive=true)" 2>&1 || :`
       if [[ $scanconfig =~ '"outcome" => "success"' ]] ; then
