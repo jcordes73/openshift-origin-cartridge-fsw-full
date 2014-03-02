@@ -8,6 +8,7 @@ License-Url: http://www.gnu.org/copyleft/lesser.txt
 Vendor: Red Hat
 Cartridge-Version: 0.0.2
 Cartridge-Vendor: rhgpe
+Source-Url: https://github.com/jcordes73/openshift-origin-cartridge-fsw-full/archive/master.zip
 Categories:
   - service
   - web_framework
