@@ -19,9 +19,7 @@ version=6.0
 function getscanconfig() {
     count=0
     while [ ${count} -lt 4 ]; do
-      #controller="${OPENSHIFT_FSW_IP}:${OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT}"
-      controller="${OPENSHIFT_FSW_IP}:9999"
-      scanconfig=`jboss-cli.sh -c --controller=${controller} "/subsystem=deployment-scanner/:read-resource(recursive=true)" 2>&1 || :`
+      scanconfig=`$OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh -c --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT "/subsystem=deployment-scanner/:read-resource(recursive=true)" 2>&1 || :`
       if [[ $scanconfig =~ '"outcome" => "success"' ]] ; then
         SCANCONFIG=$scanconfig
         return
