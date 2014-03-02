@@ -270,8 +270,7 @@ function deploy() {
     replace_global_envs
 
     # 2)  execute fsw related modifications to jboss
-    #$OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
-    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:9999 -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
+    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
     
     #JA Bride
     # no point in attempting mysql related configurs for bpms web archives if database is not up
@@ -388,8 +387,7 @@ function start() {
 function stop() {
 
     # 1)  start by undeploying any fsw webs and related configs
-    # $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-remove.cli
-    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:9999 -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-remove.cli
+    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-remove.cli
     
     if [ -f "$FSW_PID_FILE" ]; then
       echo "Stopping $cartridge_type cartridge"
