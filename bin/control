@@ -271,7 +271,8 @@ function deploy() {
     replace_global_envs
 
     # 2)  execute fsw related modifications to jboss
-    ( set -o posix ; set ) >> /tmp/fsw_cartridge.log
+    FSW_ENV_VARS="`( set -o posix ; set ) >> /tmp/fsw_cartridge.log`"
+    client_message "FSW variables: $FSW_ENV_VARS"
     $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
     
     #JA Bride
