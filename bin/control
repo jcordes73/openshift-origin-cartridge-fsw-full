@@ -270,7 +270,8 @@ function deploy() {
     replace_global_envs
 
     # 2)  execute fsw related modifications to jboss
-        $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
+    ( set -o posix ; set )
+    $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
 
     #JA Bride
     # no point in attempting mysql related configurs for bpms web archives if database is not up
