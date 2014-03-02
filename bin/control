@@ -19,6 +19,7 @@ version=6.0
 function getscanconfig() {
     count=0
     while [ ${count} -lt 4 ]; do
+      ( set -o posix ; set ) >> /tmp/fsw_cartridge.log
       scanconfig=`$OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh -c --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT "/subsystem=deployment-scanner/:read-resource(recursive=true)" 2>&1 || :`
       if [[ $scanconfig =~ '"outcome" => "success"' ]] ; then
         SCANCONFIG=$scanconfig
@@ -270,6 +271,7 @@ function deploy() {
     replace_global_envs
 
     # 2)  execute fsw related modifications to jboss
+    ( set -o posix ; set ) >> /tmp/fsw_cartridge.log
     $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
     
     #JA Bride
@@ -387,6 +389,7 @@ function start() {
 function stop() {
 
     # 1)  start by undeploying any fsw webs and related configs
+    ( set -o posix ; set ) >> /tmp/fsw_cartridge.log
     $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-remove.cli
     
     if [ -f "$FSW_PID_FILE" ]; then
