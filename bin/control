@@ -20,7 +20,7 @@ function getscanconfig() {
     count=0
     while [ ${count} -lt 4 ]; do
       FSW_ENV_VARS="`( set -o posix ; set )`"
-      client_message "FSW variables: $FSW_ENV_VARS"
+      client_message "FSW variables in getscanconfig:\n$FSW_ENV_VARS"
       scanconfig=`$OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh -c --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT "/subsystem=deployment-scanner/:read-resource(recursive=true)" 2>&1 || :`
       if [[ $scanconfig =~ '"outcome" => "success"' ]] ; then
         SCANCONFIG=$scanconfig
@@ -273,7 +273,7 @@ function deploy() {
 
     # 2)  execute fsw related modifications to jboss
     FSW_ENV_VARS="`( set -o posix ; set )`"
-    client_message "FSW variables: $FSW_ENV_VARS"
+    client_message "FSW variables in deploy:\n$FSW_ENV_VARS"
     $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-add.cli
     
     #JA Bride
@@ -392,7 +392,7 @@ function stop() {
 
     # 1)  start by undeploying any fsw webs and related configs
     FSW_ENV_VARS="`( set -o posix ; set )`"
-    client_message "FSW variables: $FSW_ENV_VARS"
+    client_message "FSW variables in stop:\n$FSW_ENV_VARS"
     $OPENSHIFT_FSW_DIR/bin/tools/jboss-cli.sh --connect --controller=$OPENSHIFT_FSW_IP:$OPENSHIFT_FSW_MANAGEMENT_NATIVE_PORT -c --file=$OPENSHIFT_FSW_DIR/filtered/fswfull-project-remove.cli
     
     if [ -f "$FSW_PID_FILE" ]; then
