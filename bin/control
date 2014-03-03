@@ -374,11 +374,13 @@ function start() {
   else
     echo "Starting $cartridge_type cartridge"
 
-    #${FSW_BIN_DIR}/standalone.sh > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
-    ${FSW_BIN_DIR}/standalone.sh > /var/log/openshift/node/platform-trace/fsw.log 2>&1 &
+    ${FSW_BIN_DIR}/standalone.sh > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
     PROCESS_ID=$!
     echo "$PROCESS_ID" > ${FSW_PID_FILE}
 
+    sleep 5
+    cat ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log
+    
     if ! ishttpup; then
       echo "Timed out waiting for http listening port"
       exit 1
