@@ -374,7 +374,8 @@ function start() {
   else
     echo "Starting $cartridge_type cartridge"
 
-    ${FSW_BIN_DIR}/standalone.sh > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
+    #${FSW_BIN_DIR}/standalone.sh > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
+    ${FSW_BIN_DIR}/standalone.sh > /tmp/fsw.log 2>&1 &
     PROCESS_ID=$!
     echo "$PROCESS_ID" > ${FSW_PID_FILE}
 
